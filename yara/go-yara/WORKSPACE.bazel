@@ -1,0 +1,25 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+http_archive(
+    name = "io_bazel_rules_go",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.21.2/rules_go-v0.21.2.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.21.2/rules_go-v0.21.2.tar.gz",
+    ],
+    sha256 = "f99a9d76e972e0c8f935b2fe6d0d9d778f67c760c6d2400e23fc2e469016e2bd",
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
+go_rules_dependencies()
+go_register_toolchains()
+
+git_repository(
+    name = "com_github_virustotal_yara",
+    remote = "https://github.com/VirusTotal/yara",
+    commit = "2893100786a3e2557d464a3868c963c1e3558d95",
+    shallow_since = "1615999305 +0100"
+)
+
+load("@com_github_virustotal_yara//:bazel/yara_deps.bzl", "yara_deps")
+yara_deps()

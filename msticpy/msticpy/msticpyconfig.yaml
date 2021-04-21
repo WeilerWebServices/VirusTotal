@@ -1,0 +1,5 @@
+msticpy:
+  FriendlyExceptions: True
+QueryDefinitions:
+  Default:
+    - 'queries'

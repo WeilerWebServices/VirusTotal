@@ -1,0 +1,56 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cbpool.go",
+        "cgo.go",
+        "compiler.go",
+        "compiler_yara37.go",
+        "error.go",
+        "error_yara34.go",
+        "error_yara35.go",
+        "error_yara36.go",
+        "error_yara37.go",
+        "error_yara38.go",
+        "error_yara311.go",
+        "keepalive.go",
+        "keepalive_go17.go",
+        "main.go",
+        "main_yara38.go",
+        "object.go",
+        "rule.go",
+        "rule_yara35.go",
+        "rule_yara37.go",
+        "rules.go",
+        "rules_callback.go",
+        "rules_yara34.go",
+        "scanner.go",
+        "stream.go",
+        "util.go",
+    ],
+    cdeps = [
+        "@com_github_virustotal_yara//:libyara",
+    ],
+    cgo = True,
+    importpath = "github.com/VirusTotal/go-yara",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "cbpool_test.go",
+        "compiler_test.go",
+        "compiler_yara37_test.go",
+        "crash_test.go",
+        "main_test.go",
+        "main_yara38_test.go",
+        "ported_test.go",
+        "rules_test.go",
+        "scanner_test.go",
+        "stress_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    embed = [":go_default_library"],
+)
